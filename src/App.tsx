@@ -5,7 +5,7 @@ import { supabase } from "./lib/supabase";
 type Page="dashboard"|"monitor"|"questions"|"games"|"errors"|"performance"|"settings";
 const nav=[["dashboard","Dashboard",Bot],["monitor","Monitor",Activity],["questions","Questions",MessageSquare],["games","Games",Gamepad2],["performance","Performance",Gauge],["errors","Errors",AlertTriangle],["settings","Settings",Settings]] as const;
 
-function Login({onLoggedIn}:{onLoggedIn:()=>void}){const[email,setEmail]=useState(""),[password,setPassword]=useState(""),[busy,setBusy]=useState(false),[error,setError]=useState("");
+function Login({onLoggedIn}:{onLoggedIn:()=>void}){const[email,setEmail]=useState("mharbalaba@gmail.com"),[password,setPassword]=useState(""),[busy,setBusy]=useState(false),[error,setError]=useState("");
 async function submit(e:React.FormEvent){e.preventDefault();setBusy(true);setError("");const r=await supabase.auth.signInWithPassword({email,password});if(r.error)setError(r.error.message);else onLoggedIn();setBusy(false)}
 return <main className="login"><form className="login-card" onSubmit={submit}><div className="brand"><Bot size={30}/><div><strong>UzzapBot</strong><span>Control Center</span></div></div><h1>Administrator Login</h1><p>Sign in to monitor UzzapBot.</p><label>Email<input type="email" value={email} onChange={e=>setEmail(e.target.value)} required/></label><label>Password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} required/></label>{error&&<div className="error">{error}</div>}<button className="primary" disabled={busy}>{busy?"Signing in...":"Sign in"}</button></form></main>}
 
