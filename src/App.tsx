@@ -67,4 +67,5 @@ function Players(){
  useEffect(()=>{if(!room){setPlayers([]);return}supabase.rpc("uzzapbot_control_players",{p_room_name:room}).then(({data})=>setPlayers(data||[]))},[room]);
  return <div><div className="toolbar"><div><h2>Players</h2><p>Current game participants, scores and answer activity.</p></div><select value={room} onChange={e=>setRoom(e.target.value)}>{rooms.map(r=><option key={r.room_name}>{r.room_name}</option>)}</select></div><div className="panel"><div className="table-wrap"><table><thead><tr><th>Username</th><th>Nickname</th><th>Score</th><th>Correct</th><th>Attempts</th><th>Clues</th><th>Joined</th><th>Updated</th></tr></thead><tbody>{players.map(p=><tr key={p.username}><td>{p.username}</td><td>{p.nickname}</td><td><b>{p.score}</b></td><td>{p.correct}</td><td>{p.attempts}</td><td>{p.clues_used}</td><td>{new Date(p.joined_at).toLocaleString()}</td><td>{new Date(p.updated_at).toLocaleString()}</td></tr>)}{!players.length&&<tr><td colSpan={8}>No active players in this room.</td></tr>}</tbody></table></div></div></div>
 }
-\nexport default App;
+
+export default App;
