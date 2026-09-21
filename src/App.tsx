@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Activity, AlertTriangle, Bot, Gamepad2, LogOut, Menu, MessageSquare, RefreshCw, Settings, ShieldCheck, Users, X } from "lucide-react";
+import { Activity, AlertTriangle, Bot, Gamepad2, Gauge, HelpCircle, BookOpen, Clock, LogOut, Menu, MessageSquare, RefreshCw, Settings, ShieldCheck, Users, X } from "lucide-react";
 import { supabase } from "./lib/supabase";
 
-type Page="dashboard"|"monitor"|"questions"|"games"|"errors"|"settings";
-const nav=[["dashboard","Dashboard",Bot],["monitor","Monitor",Activity],["questions","Questions",MessageSquare],["games","Games",Gamepad2],["errors","Errors",AlertTriangle],["settings","Settings",Settings]] as const;
+type Page="dashboard"|"monitor"|"questions"|"games"|"errors"|"performance"|"settings";
+const nav=[["dashboard","Dashboard",Bot],["monitor","Monitor",Activity],["questions","Questions",MessageSquare],["games","Games",Gamepad2],["performance","Performance",Gauge],["errors","Errors",AlertTriangle],["settings","Settings",Settings]] as const;
 
 function Login({onLoggedIn}:{onLoggedIn:()=>void}){const[email,setEmail]=useState(""),[password,setPassword]=useState(""),[busy,setBusy]=useState(false),[error,setError]=useState("");
 async function submit(e:React.FormEvent){e.preventDefault();setBusy(true);setError("");const r=await supabase.auth.signInWithPassword({email,password});if(r.error)setError(r.error.message);else onLoggedIn();setBusy(false)}
